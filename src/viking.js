@@ -81,17 +81,17 @@ class War {
         vikingAttack(){
 
             //select randomSaxon from saxonArmy
-            let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
+            let randomSaxon = Math.floor(Math.random() * this.saxonArmy.length)
 
             //select randomViking from vikingArmy
-            let randomViking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)]
+            let randomViking = Math.floor(Math.random() * this.vikingArmy.length)
 
             //attack randomSaxon with the strength of randomViking
-            let randomSaxonResult = randomSaxon.receiveDamage(randomViking.attack())
+            let randomSaxonResult = this.saxonArmy[randomSaxon].receiveDamage(vikingArmy[randomViking].attack())
 
             //remove dead saxons
-            if(saxonArmy[randomSaxon].health <= 0){
-                saxonArmy.splice([randomSaxon], 1)
+            if(saxonArmy[randomSaxon].health < 0){
+                saxonArmy.splice(randomSaxon, 1)
             }
 
             return randomSaxonResult
@@ -99,24 +99,22 @@ class War {
         }
 
         saxonAttack(){
-            //select randomSaxon from saxonArmy
-            let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
-
-        console.log([randomSaxon])
+        //select randomSaxon from saxonArmy
+        let randomSaxon = Math.floor(Math.random() * this.saxonArmy.length)
 
         //select randomViking from vikingArmy
-        let randomViking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)]
+        let randomViking = Math.floor(Math.random() * this.vikingArmy.length)
 
         //attack randomViking with the strength of randomSaxon
-        let randomVikingResult = randomViking.receiveDamage(randomSaxon.attack())
+        let randomVikingResult = this.vikingArmy[randomViking].receiveDamage(saxonArmy[randomSaxon].attack())
 
         //remove dead vikings
 
             if(vikingArmy[randomViking].health <= 0){
-                vikingArmy.splice([randomViking], 1)
+                vikingArmy.splice(randomViking, 1)
             }
-
-        return randomVikingResult
+            
+            return randomVikingResult
     }
 
 
@@ -124,13 +122,9 @@ class War {
     showStatus(){
         if(this.saxonArmy.length <= 0){
             return "Vikings have won the war of the century!" 
-         }
-
-        else if(this.vikingArmy.length <= 0){
+         } else if(this.vikingArmy.length <= 0){
             return "Saxons have fought for their lives and survived another day..."
-        }
-
-        else if(this.vikingArmy.length <= 1 && saxonArmy.length <= 1){
+        } else if(this.vikingArmy.length <= 1 && saxonArmy.length <= 1){
             return "Vikings and Saxons are still in the thick of battle."
         }
  
